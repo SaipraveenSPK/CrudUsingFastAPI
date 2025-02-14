@@ -95,6 +95,11 @@ def get_product(product_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Product not found")
     return product
 
+@app.get("/products/count/")
+def get_product_count(db: Session = Depends(get_db)):
+    count = db.query(ProductDB).count()
+    return {"Count of Products": count}
+
 # Delete product by ID
 @app.delete("/products/{product_id}")
 def delete_product(product_id: int, db: Session = Depends(get_db)):
