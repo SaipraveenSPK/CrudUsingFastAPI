@@ -4,7 +4,11 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base, Session, relationship
 
 # Database configuration
-DATABASE_URL = "mysql+mysqlconnector://todo_user:pass@localhost/ecommerce_db"
+# DATABASE_URL = "mysql+mysqlconnector://todo_user:pass@localhost/ecommerce_db"
+import os
+
+DATABASE_URL = os.getenv("DATABASE_URL", "mysql+mysqlconnector://todo_user:pass@localhost/ecommerce_db")
+
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
